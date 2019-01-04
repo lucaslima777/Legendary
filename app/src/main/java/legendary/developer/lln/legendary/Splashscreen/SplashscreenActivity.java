@@ -15,8 +15,6 @@ public class SplashscreenActivity extends AppCompatActivity implements OnAutoTex
 
     AutoTextView tvAutoLegendary;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,5 +31,6 @@ public class SplashscreenActivity extends AppCompatActivity implements OnAutoTex
     public void OnAnimateFinish() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }
