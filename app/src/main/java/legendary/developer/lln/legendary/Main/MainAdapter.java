@@ -1,46 +1,42 @@
 package legendary.developer.lln.legendary.Main;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import legendary.developer.lln.legendary.R;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder>{
+public class MainAdapter extends RecyclerView.Adapter<MainHolder> {
 
-    List<MainItems> mainAdapterList;
+    private List<MainModel> mainAdapterList;
 
-    public MainAdapter(List<MainItems> list){
+    public MainAdapter(List<MainModel> list) {
         this.mainAdapterList = list;
     }
 
-
-
     @NonNull
     @Override
-    public MainViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_main, viewGroup, false);
-        MainViewHolder viewHolder = new MainViewHolder(v);
-        return viewHolder;
+    public MainHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new MainHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_main, viewGroup, false));
     }
 
-
-
     @Override
-    public void onBindViewHolder(@NonNull MainViewHolder mainViewHolder, int i) {
-        mainViewHolder.title.setText(mainAdapterList.get(i).getTxtTitle());
-        mainViewHolder.description.setText(mainAdapterList.get(i).getTxtDescription());
-        mainViewHolder.imageView.setImageResource(mainAdapterList.get(i).getIdImage());
+    public void onBindViewHolder(@NonNull MainHolder mainHolder, final int i) {
+        mainHolder.title.setText(mainAdapterList.get(i).getTxtTitle());
+        mainHolder.description.setText(mainAdapterList.get(i).getTxtDescription());
+        mainHolder.imageView.setImageResource(mainAdapterList.get(i).getIdImage());
+
+        mainHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //insertItem(new MainModel(R.drawable.ic_launcher_foreground, "Titulo", "Descricao", 2));
+            }
+        });
     }
 
     @Override
@@ -53,18 +49,23 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public static class MainViewHolder extends RecyclerView.ViewHolder {
-        CardView cardView;
-        TextView title;
-        TextView description;
-        ImageView imageView;
+    public void insertItem(MainModel user) {
+        mainAdapterList.add(user);
+        notifyItemInserted(getItemCount());
+    }
 
-        MainViewHolder(View itemView) {
-            super(itemView);
-            cardView = (CardView)itemView.findViewById(R.id.card_view_main);
-            title = (TextView)itemView.findViewById(R.id.textView_title);
-            description = (TextView)itemView.findViewById(R.id.textView_description);
-            imageView = (ImageView)itemView.findViewById(R.id.imageView_header);
-        }
+    public void updateItem(int position) {
+        mainAdapterList.get(position).incrementPosition();
+        notifyItemChanged(position);
+    }
+
+    public void removerItem(int position) {
+        mainAdapterList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mainAdapterList.size());
+    }
+
+    public void updateList(MainModel user) {
+        insertItem(user);
     }
 }

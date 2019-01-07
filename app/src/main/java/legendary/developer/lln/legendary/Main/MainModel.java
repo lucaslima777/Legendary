@@ -5,17 +5,19 @@ import java.util.List;
 
 import legendary.developer.lln.legendary.R;
 
-public class MainItems {
+public class MainModel {
 
     private final int idImage;
     private final String txtTitle;
     private final String txtDescription;
+    private int mPosition;
 
 
-    public MainItems(int idImage, String txtTitle, String txtDescription) {
+    public MainModel(int idImage, String txtTitle, String txtDescription, int position) {
         this.idImage = idImage;
         this.txtTitle = txtTitle;
         this.txtDescription = txtDescription;
+        this.mPosition = position;
     }
 
     public int getIdImage() {
@@ -28,5 +30,9 @@ public class MainItems {
 
     public String getTxtDescription() {
         return txtDescription;
+    }
+
+    public void incrementPosition() {
+        mPosition++;
     }
 }

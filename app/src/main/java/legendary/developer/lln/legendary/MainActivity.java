@@ -1,5 +1,7 @@
 package legendary.developer.lln.legendary;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import legendary.developer.lln.legendary.Main.MainAdapter;
-import legendary.developer.lln.legendary.Main.MainItems;
+import legendary.developer.lln.legendary.Main.MainModel;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     private MainAdapter mAdapter;
-    private List<MainItems> mainItemsList;
+    private List<MainModel> mainItemsList;
 
 
     @Override
@@ -34,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeData(){
         mainItemsList = new ArrayList<>();
-        mainItemsList.add(new MainItems(R.drawable.ic_launcher_foreground, "Titulo", "Descricao"));
-        mainItemsList.add(new MainItems(R.drawable.ic_launcher_background, "Titulo 2", "Descricao 2"));
+        int i = 0;
+        mainItemsList.add(new MainModel(R.drawable.ic_launcher_foreground, "Titulo", "Descricao", i++));
+        mainItemsList.add(new MainModel(R.drawable.ic_launcher_background, "Titulo 2", "Descricao 2", i++));
     }
 
 }
