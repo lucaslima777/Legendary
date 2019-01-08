@@ -19,7 +19,9 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Lifecycle.LifecycleActivity"></activity>
+
+        <activity android:name=".Lifecycle.LifecycleActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

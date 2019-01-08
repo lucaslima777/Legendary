@@ -1,22 +1,30 @@
 package legendary.developer.lln.legendary.Main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import legendary.developer.lln.legendary.Lifecycle.LifecycleActivity;
 import legendary.developer.lln.legendary.R;
 
 public class MainAdapter extends RecyclerView.Adapter<MainHolder> {
 
     private List<MainModel> mainAdapterList;
+    private Context mContext;
 
-    public MainAdapter(List<MainModel> list) {
+    public MainAdapter(List<MainModel> list, Context context) {
         this.mainAdapterList = list;
+        this.mContext = context;
     }
 
     @NonNull
@@ -34,7 +42,15 @@ public class MainAdapter extends RecyclerView.Adapter<MainHolder> {
         mainHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //insertItem(new MainModel(R.drawable.ic_launcher_foreground, "Titulo", "Descricao", 2));
+                switch (i){
+                    case 0:
+                        Intent intent = new Intent(mContext, LifecycleActivity.class);
+                        mContext.startActivity(intent);
+                        break;
+                    case 1:
+
+                        break;
+                }
             }
         });
     }
