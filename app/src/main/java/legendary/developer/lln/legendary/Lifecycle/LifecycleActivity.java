@@ -1,5 +1,8 @@
 package legendary.developer.lln.legendary.Lifecycle;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,7 +25,6 @@ public class LifecycleActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     private LifecycleAdapter mAdapter;
     private List<LifecycleModel> modelList;
-    private AnimateDownUtil animateDownUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,6 @@ public class LifecycleActivity extends AppCompatActivity {
         modelList = new ArrayList<>();
         modelList.add(new LifecycleModel("onCreate"));
 
-
         mRecyclerView = findViewById(R.id.recycler_view_lifecycle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -39,9 +40,9 @@ public class LifecycleActivity extends AppCompatActivity {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         mAdapter = new LifecycleAdapter(modelList, this);
-        animateDownUtil = new AnimateDownUtil(mRecyclerView);
+        AnimateDownUtil animate = new AnimateDownUtil(mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
-        animateDownUtil.runAnimationRight();
+        animate.runAnimationRight();
     }
 
     @Override
@@ -106,4 +107,6 @@ public class LifecycleActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
         Toast.makeText(this, "onDestroy", Toast.LENGTH_LONG).show();
     }
+
+
 }

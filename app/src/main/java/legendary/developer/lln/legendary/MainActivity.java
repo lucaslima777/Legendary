@@ -15,9 +15,7 @@ import legendary.developer.lln.legendary.Util.AnimateDownUtil;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
-    private MainAdapter mAdapter;
     private List<MainModel> mainItemsList;
-    private AnimateDownUtil animateDownUtil;
 
 
     @Override
@@ -30,22 +28,15 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(layoutManager);
 
         initializeData();
-        mAdapter = new MainAdapter(mainItemsList, this);
-        animateDownUtil = new AnimateDownUtil(mRecyclerView);
+        MainAdapter mAdapter = new MainAdapter(mainItemsList, this);
+        AnimateDownUtil animate = new AnimateDownUtil(mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
+        animate.runAnimationDown();
     }
 
     private void initializeData() {
         mainItemsList = new ArrayList<>();
-        for (int i = 0; i <= 20; i++) {
-            mainItemsList.add(new MainModel(R.drawable.ic_launcher_foreground, "Titulo " + i, "Descricao " + i, i));
-        }
+        mainItemsList.add(new MainModel(R.drawable.icon_lifecycle, "Lifecycle", "Explains the activity lifecycle in detail.", 1));
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        animateDownUtil.runAnimationDown();
     }
 }
