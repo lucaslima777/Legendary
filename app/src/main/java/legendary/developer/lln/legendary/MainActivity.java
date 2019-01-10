@@ -1,17 +1,13 @@
 package legendary.developer.lln.legendary;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import legendary.developer.lln.legendary.Main.MainAdapter;
 import legendary.developer.lln.legendary.Main.MainModel;
 import legendary.developer.lln.legendary.Util.AnimateDownUtil;
@@ -50,6 +46,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        animateDownUtil.runLayoutAnimation();
+        animateDownUtil.runAnimationDown();
     }
 }

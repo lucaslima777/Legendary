@@ -15,9 +15,18 @@ public class AnimateDownUtil {
         this.mRecyclerView = recyclerView;
     }
 
-    public void runLayoutAnimation() {
+    public void runAnimationDown() {
         final Context context = mRecyclerView.getContext();
         final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_down);
+
+        mRecyclerView.setLayoutAnimation(controller);
+        mRecyclerView.getAdapter().notifyDataSetChanged();
+        mRecyclerView.scheduleLayoutAnimation();
+    }
+
+    public void runAnimationRight() {
+        final Context context = mRecyclerView.getContext();
+        final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_right);
 
         mRecyclerView.setLayoutAnimation(controller);
         mRecyclerView.getAdapter().notifyDataSetChanged();

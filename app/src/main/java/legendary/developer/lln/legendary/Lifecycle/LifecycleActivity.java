@@ -1,10 +1,13 @@
 package legendary.developer.lln.legendary.Lifecycle;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,29 +41,69 @@ public class LifecycleActivity extends AppCompatActivity {
         mAdapter = new LifecycleAdapter(modelList, this);
         animateDownUtil = new AnimateDownUtil(mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
+        animateDownUtil.runAnimationRight();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        modelList.add(new LifecycleModel("onCreate"));
+        modelList.add(new LifecycleModel("onStart"));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         modelList.add(new LifecycleModel("onResume"));
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         modelList.add(new LifecycleModel("onPause"));
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         modelList.add(new LifecycleModel("onStop"));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        modelList.add(new LifecycleModel("onActivityResult"));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        modelList.add(new LifecycleModel("onPostResume"));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        modelList.add(new LifecycleModel("onPostCreate"));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        modelList.add(new LifecycleModel("onRestart"));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        modelList.add(new LifecycleModel("onDestroy"));
+        mAdapter.notifyDataSetChanged();
+        Toast.makeText(this, "onDestroy", Toast.LENGTH_LONG).show();
     }
 }

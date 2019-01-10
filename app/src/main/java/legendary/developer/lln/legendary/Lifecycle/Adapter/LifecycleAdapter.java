@@ -32,11 +32,12 @@ public class LifecycleAdapter extends RecyclerView.Adapter<LifecycleHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LifecycleHolder lifecycleHolder, int i) {
+    public void onBindViewHolder(@NonNull LifecycleHolder lifecycleHolder, final int i) {
         lifecycleHolder.infoLifecycle.setText(modelList.get(i).getTxtLifecycle());
         lifecycleHolder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                removerItem(i);
             }
         });
     }
