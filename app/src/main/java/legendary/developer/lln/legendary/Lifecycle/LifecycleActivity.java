@@ -5,15 +5,21 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 
 import legendary.developer.lln.legendary.Lifecycle.Adapter.LifecycleAdapter;
 import legendary.developer.lln.legendary.Lifecycle.Model.LifecycleModel;
@@ -26,10 +32,16 @@ public class LifecycleActivity extends AppCompatActivity {
     private LifecycleAdapter mAdapter;
     private List<LifecycleModel> modelList;
 
+    private static final String LAST_STATE_ACTIVITY = "null";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lifecycle);
+
+        getSupportActionBar().setTitle("Lifecycle");
+
         modelList = new ArrayList<>();
         modelList.add(new LifecycleModel("onCreate"));
 
@@ -49,6 +61,7 @@ public class LifecycleActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         modelList.add(new LifecycleModel("onStart"));
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -105,8 +118,24 @@ public class LifecycleActivity extends AppCompatActivity {
         super.onDestroy();
         modelList.add(new LifecycleModel("onDestroy"));
         mAdapter.notifyDataSetChanged();
-        Toast.makeText(this, "onDestroy", Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(LAST_STATE_ACTIVITY, "onDestroy");
+        super.onSaveInstanceState(outState);
+        modelList.add(new LifecycleModel("onSaveInstanceState"));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String last_activity;
+        String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
+        last_activity = savedInstanceState.getString(LAST_STATE_ACTIVITY);
+        modelList.add(new LifecycleModel("onRestoreInstanceState:\n"  + last_activity + " in "+ currentDateTimeString));
+        mAdapter.notifyDataSetChanged();
+    }
 
 }
