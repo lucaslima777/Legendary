@@ -3,7 +3,7 @@ Best Legendary
 
 # LIFECYCLE
 
-<img src="https://github.com/lucaslima777/Legendary/blob/master/files/lifecycle_gif.gif?raw=true" title="lifecycle" />
+<img src="https://github.com/lucaslima777/Legendary/blob/master/files/lifecycle_demo_gif.gif?raw=true" title="lifecycle" />
 
 # Back and Home pressed
 
